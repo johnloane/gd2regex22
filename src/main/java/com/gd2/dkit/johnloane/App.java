@@ -160,11 +160,195 @@ public class App
         String visa2 = "5444444444444"; //should not match
         String visa3 = "4444444444444444"; //should match
         String visa4 = "4444"; //should not match
+        String visa5 = "44444444444444";
 
-        String visaRegex = "?????";
+        String emilyVisaRegex = "^(4[0-9]{12,15})$";
+        //Main issue 12,15 means anything between 12 and 15 so 13 and 14 which are not valid will meet the criteria
 
-        System.out.println("visa1 " + visa1.matches(visaRegex));
+        String prithviVisaRegex = "^4[0-9]{12}$|^4[0-9]{15}$";
+
+        String anotherVisaRegex = "^4[0-9]{12}([0-9]{3})?$";
+
+        System.out.println("visa1 " + visa1.matches(prithviVisaRegex));
+        System.out.println("visa2 " + visa2.matches(prithviVisaRegex));
+        System.out.println("visa3 " + visa3.matches(prithviVisaRegex));
+        System.out.println("visa4 " + visa4.matches(prithviVisaRegex));
+        System.out.println("visa5 " + visa5.matches(prithviVisaRegex));
+
+        //challengeOne();
+        //challengeTwo();
+        //challengeThree();
+        //challengeFour();
+        //challengeFive();
+        //challengeSix();
+        //challengeSeven();
+        //challengeEight();
+        //Homework challenge
+        //challengeNine();
+        //challengeTen();
+        //challengeEleven();
+        //challengeTwelve();
+        //challengeThirteen();
+        finalChallenge();
 
 
+    }
+
+    private static void finalChallenge()
+    {
+        //This should match both challenge 12 and challenge13
+        //11111 or 11111-1111 should both match
+        String challenge12 = "11111";
+        String challenge13 = "11111-1111";
+        String prithviRegex = "^\\d{5}(\\-\\d{4})?$";
+        String regex = "^\\d{5}$|^\\d{5}\\-\\d{4}$";
+        System.out.println(challenge12.matches(regex));
+        System.out.println(challenge13.matches(regex));
+    }
+
+    private static void challengeThirteen()
+    {
+        String challenge13 = "11111-1111";
+        String niallMRegex = "^\\d{5}\\-\\d{4}$";
+        String niallORegex = "^[0-9]{5}\\-[0-9]{4}$";
+        String prithviRegex = "^1{5}\\-1{4}$";
+        String leeAnneRegex = "11111-1111";
+        System.out.println(challenge13.matches(leeAnneRegex));
+    }
+
+    private static void challengeTwelve()
+    {
+        String challenge12 = "11111";
+        String niallsRegex = "11111";
+        String stephensRegex = "^[0-9]{5}$";
+        String regex = "^\\d{5}$";
+        System.out.println(challenge12.matches(regex));
+    }
+
+    private static void challengeEleven()
+    {
+        String challenge11 = "{0,2}, {0, 5}, {1, 3} {x, y}, {2, 4}";
+        //Only want numbers
+        String regex = "\\{([0-9]\\,\\s*[0-9])\\}";
+        Pattern pattern11 = Pattern.compile(regex);
+        Matcher matcher11 = pattern11.matcher(challenge11);
+        System.out.println(matcher11.matches());
+        matcher11.reset();
+        while(matcher11.find())
+        {
+            System.out.println("Occurrence " + matcher11.group(1));
+        }
+    }
+
+    private static void challengeTen()
+    {
+        String challenge10 = "{0,2}, {0, 5}, {1, 3}, {2, 4}";
+        //Want a regex that will throw away the curley brackets and just return the values
+        //{0, 2} -> 0, 2
+        //Plan find curley brackets //{, use a group to find values inside curley brackets, use pattern and matcher to print out all occurrences
+        String regex = "\\{([0-9]\\,\\s*[0-9])\\}";
+        String regex2 = "\\{(.+?)\\}"; //? makes it lazys
+        Pattern pattern10 = Pattern.compile(regex2);
+        Matcher matcher10 = pattern10.matcher(challenge10);
+        System.out.println(matcher10.matches());
+        matcher10.reset();
+        while(matcher10.find())
+        {
+            System.out.println("Occurrence " + matcher10.group(1));
+        }
+    }
+
+    private static void challengeNine()
+    {
+        String challenge9 = "abcd.135\tuvqz.7\ttzik.999\n";
+        //Tweak the regex from challenge 8 so that you can find and print all of the numbers in this string
+        //Output should be 135, 7, 999
+        String regex = "[A-Za-z]+\\.([0-9]+)\\s";
+        Pattern pattern9 = Pattern.compile(regex);
+        Matcher matcher9 = pattern9.matcher(challenge9);
+        System.out.println(matcher9.matches());
+        while(matcher9.find())
+        {
+            System.out.println("Occurrence " + matcher9.group(1));
+        }
+    }
+
+    private static void challengeEight()
+    {
+        String challenge8 = "abcd.135uvqz.7tzik.999";
+        //Regex should find and extract all of the numbers
+        //Should return 135, 7, 999
+        String regex = "[A-Za-z]+\\.([0-9]+)";
+        Pattern pattern8 = Pattern.compile(regex);
+        Matcher matcher8 = pattern8.matcher(challenge8);
+        System.out.println(matcher8.matches());
+        while(matcher8.find())
+        {
+            System.out.println("Occurrence " + matcher8.group(1));
+        }
+
+
+    }
+
+    private static void challengeSeven()
+    {
+        //One or more characters upper or lowercase, followed by a dot, followed by one or more digits
+        String challenge7 = "abcd.135";
+        String regex = "^[A-Za-z]+\\.[0-9]+$";
+        System.out.println(challenge7.matches(regex));
+    }
+
+    private static void challengeSix()
+    {
+        String challenge6 = "aaabcccccccccdddefffg";
+        //Write regex which will match any collection of one or more characters that appear in this string
+        String regex = "[a-g]+";
+        System.out.println(challenge6.matches(regex));
+    }
+
+    private static void challengeFive()
+    {
+        String challenge5 = "Replace all blanks with underscores.";
+        System.out.println(challenge5.replaceAll(" ", "_"));
+    }
+
+    private static void challengeFour()
+    {
+        //Do challenge two using the Pattern and Matcher classes
+        String one = "I want a bike.";
+        String two = "I want a ball.";
+
+        String regex = "I want a \\w+.";
+        //String dylansRegexPatternForSentence = "(i.*?[.])";
+        Pattern pattern1 = Pattern.compile(regex);
+        Matcher matcher1 = pattern1.matcher(two);
+        System.out.println(matcher1.matches());
+    }
+
+    private static void challengeThree()
+    {
+        //Should only match I want a bike or I want a ball
+        String one = "I want a bike.";
+        String two = "I want a ball.";
+
+        String niallsRegex = "I want a (bike|ball).";
+        System.out.println(one.matches(niallsRegex));
+        System.out.println(two.matches(niallsRegex));
+    }
+
+    private static void challengeTwo()
+    {
+        String one = "I want a bike.";
+        String two = "I want a ball.";
+        //Write regex which will match either of these options
+        String regex = "I want a \\w+.";
+        System.out.println(one.matches(regex));
+        System.out.println(two.matches(regex));
+    }
+
+    private static void challengeOne()
+    {
+        String challenge1 = "All I want for Christmas is good grades";
+        System.out.println(challenge1.matches("All I want for Christmas is good grades"));
     }
 }
